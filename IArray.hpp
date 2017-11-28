@@ -105,7 +105,7 @@ void IArray<T>::remove(const size_t index)
 		{
 			m_values[i] = m_values[i + 1];
 		}
-		--m_end_index;
+		--m_size;
 	}
 }
 
