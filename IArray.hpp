@@ -11,6 +11,7 @@ public:
 	~IArray();
 
 	T & operator[](const size_t index);
+	void operator=(const IArray<T> &other);
 
 	void clear() { m_size = 0; }					// 清空数组
 	void push_back(const T & value);				// 在最后插入一个元素
@@ -57,6 +58,25 @@ T & IArray<T>::operator[](const size_t index)
 		static T value;
 		return value;
 	}
+}
+
+template <typename T>
+void IArray<T>::operator=(const IArray<T>& other)
+{
+	int new_capacity = other.m_capacity;
+	T *new_values = new T[new_capacity];
+
+	delete[] this->m_values;
+
+	this->m_size = other.m_size;
+	this->m_capacity = other.m_capacity;
+
+	for (int i = 0; i < static_cast<int>(this->m_size); ++i)
+	{
+		new_values[i] = other.m_values[i];
+	}
+
+	this->m_values = new_values;
 }
 
 template <typename T>
