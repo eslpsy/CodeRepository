@@ -67,7 +67,7 @@ void IArray<T>::push_back(const T & value)
 		int new_capacity = m_capacity * 2;
 		T *new_values = new T[new_capacity];
 
-		for (int i = 0; i < m_size; ++i)
+		for (int i = 0; i < static_cast<int>(m_size); ++i)
 		{
 			new_values[i] = m_values[i];
 		}
