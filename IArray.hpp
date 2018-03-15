@@ -11,6 +11,7 @@ public:
 	~IArray();
 
 	T & operator[](const size_t index);
+	const T& operator[](const unsigned index) const;
 	void operator=(const IArray<T> &other);
 
 	void clear() { m_size = 0; }					// 清空数组
@@ -43,6 +44,25 @@ IArray<T>::~IArray()
 
 template <typename T>
 T & IArray<T>::operator[](const size_t index)
+{
+#ifdef _DEBUG
+	assert(index >= 0 && index < m_size);
+#endif
+
+	if (index >= 0 && index < m_size)
+	{
+		return m_values[index];
+	}
+
+	else
+	{
+		static T value;
+		return value;
+	}
+}
+
+template <typename T>
+const T & IArray<T>::operator[](const size_t index) const
 {
 #ifdef _DEBUG
 	assert(index >= 0 && index < m_size);
